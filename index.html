@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colorful Mouse Motion Effect</title>
+  <style>
+    /* CSS for the colorful dots */
+    .colorfulEffect {
+      position: fixed;
+      width: 20px; /* Adjust size of colorful effect */
+      height: 20px; /* Adjust size of colorful effect */
+      border-radius: 50%; /* Make it a circle */
+      pointer-events: none; /* Allow mouse events to pass through */
+      background-color: transparent; /* Initial transparent background color */
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Add a glow effect */
+      transition: transform 0.1s ease, background-color 0.5s ease; /* Smooth transition */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Container to hold the colorful effects -->
+  <div class="slider-container"></div>
+
+  <!-- Include script.js -->
+  <script>
+    document.addEventListener('mousemove', function (event) {
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+
+      // Create a new colorful dot element
+      const colorfulEffect = document.createElement('div');
+      colorfulEffect.classList.add('colorfulEffect');
+      colorfulEffect.style.left = mouseX + 'px';
+      colorfulEffect.style.top = mouseY + 'px';
+
+      // Calculate color based on mouse position
+      const red = mouseX / window.innerWidth * 255;
+      const green = mouseY / window.innerHeight * 255;
+      colorfulEffect.style.backgroundColor = `rgb(${red}, ${green}, 150)`;
+
+      // Add the colorful dot to the container
+      document.querySelector('.slider-container').appendChild(colorfulEffect);
+
+      // Fade out colorfulEffect after a certain duration
+      setTimeout(() => {
+        colorfulEffect.style.opacity = 0;
+        setTimeout(() => {
+          colorfulEffect.remove();
+        }, 500); // Adjust the fade out duration (in milliseconds)
+      }, 300); // Adjust the duration before fading out starts (in milliseconds)
+    });
+  </script>
+</body>
+
+</html>
